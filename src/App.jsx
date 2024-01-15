@@ -1,9 +1,10 @@
 import "./App.css";
+import Chip from "./components/Chip";
 
 function App() {
   return (
     <>
-      <div>Hello</div>
+      <Chip />
     </>
   );
 }
