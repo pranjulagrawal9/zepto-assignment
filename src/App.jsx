@@ -1,13 +1,12 @@
 import "./App.css";
-import Chip from "./components/Chip";
-import ResultsBox from "./components/ResultsBox";
+
+import InputField from "./components/InputField";
 
 function App() {
   return (
-    <>
-      <Chip />
-      <ResultsBox />
-    </>
+    <div className="min-h-screen flex justify-center items-center">
+      <InputField />
+    </div>
   );
 }
 
