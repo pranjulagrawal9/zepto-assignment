@@ -22,7 +22,7 @@ const ResultsBox = forwardRef(function ResultsBox(props, ref) {
 
   return (
     <div
-      className="w-96 shadow-2xl rounded-sm absolute mt-2 ml-2 max-h-64 overflow-y-auto bg-white"
+      className="w-[450px] shadow-2xl rounded-sm absolute mt-2 ml-2 max-h-80 overflow-y-auto bg-white"
       ref={ref}
     >
       {searchResults?.map((user, i) => (

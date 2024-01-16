@@ -86,7 +86,7 @@ function InputField() {
   }, [selectedItem]);
 
   return (
-    <div className="w-1/2 border-b-2 border-blue-500 pb-2">
+    <div className="w-3/5 border-b-4 border-blue-500 pb-2">
       <div className="flex flex-wrap gap-2 items-center">
         {chips?.map((chip, i) => (
           <Chip
