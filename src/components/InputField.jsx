@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Chip from "./Chip";
 import ResultsBox from "./ResultsBox";
 import { users } from "../data/users";
@@ -11,8 +11,11 @@ function InputField() {
   const [searchResults, setSearchResults] = useState([]);
   const [displayBox, setDisplayBox] = useState(false);
   const [selectedItem, setSelectedItem] = useState(-1);
+  const [highlightElement, setHighlightElement] = useState(null);
+  const backSpaceCounter = useRef(0);
 
   function handleKeyBoardNavigation(e) {
+    console.log(e.key);
     if (e.key === "ArrowDown") {
       setSelectedItem((prev) =>
         prev < searchResults.length - 1 ? prev + 1 : 0
@@ -26,6 +29,11 @@ function InputField() {
       handleUserSelection(selectedUser, setChips, setUsersList);
       setSearchQuery("");
       setSelectedItem(-1);
+    } else if (e.key === "Backspace" && searchQuery.length === 0) {
+      backSpaceCounter.current++;
+      if (backSpaceCounter.current === 1) {
+        setHighlightElement(chips.length - 1);
+      }
     }
   }
 
@@ -35,13 +43,14 @@ function InputField() {
   }
 
   return (
-    <div className="w-1/2 border-b-2 border-blue-500">
-      <div className="flex flex-wrap gap-2">
-        {chips?.map((chip) => (
+    <div className="w-1/2 border-b-2 border-blue-500 pb-2">
+      <div className="flex flex-wrap gap-2 items-center">
+        {chips?.map((chip, i) => (
           <Chip
             key={chip.id}
             {...chip}
             onRemove={() => handleRemoveChip(chip)}
+            isHighLight={highlightElement === i}
           />
         ))}
         <div className="relative">
@@ -50,6 +59,7 @@ function InputField() {
             className="outline-none"
             onFocus={() => setDisplayBox(true)}
             value={searchQuery}
+            placeholder="Add new user..."
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={handleKeyBoardNavigation}
           />

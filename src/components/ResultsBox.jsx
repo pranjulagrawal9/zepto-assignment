@@ -18,7 +18,7 @@ function ResultsBox({
   }, [query, usersList, setSearchResults]);
 
   return (
-    <div className="w-96 shadow-lg rounded-sm absolute mt-2 overflow-y-auto">
+    <div className="w-96 shadow-2xl rounded-sm absolute mt-2 ml-2 overflow-y-auto bg-white">
       {searchResults?.map((user, i) => (
         <Result
           user={user}
