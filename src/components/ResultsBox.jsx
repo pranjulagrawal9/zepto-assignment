@@ -1,15 +1,16 @@
-import { useEffect } from "react";
+import { forwardRef, useEffect } from "react";
 import Result from "./Result";
 
-function ResultsBox({
-  query,
-  searchResults,
-  setSearchResults,
-  usersList,
-  setUsersList,
-  setChips,
-  selectedItem,
-}) {
+const ResultsBox = forwardRef(function ResultsBox(props, ref) {
+  const {
+    query,
+    searchResults,
+    setSearchResults,
+    usersList,
+    setUsersList,
+    setChips,
+    selectedItem,
+  } = props;
   useEffect(() => {
     const filteredResults = usersList.filter((user) =>
       user.name.toLowerCase().includes(query.toLowerCase())
@@ -18,7 +19,10 @@ function ResultsBox({
   }, [query, usersList, setSearchResults]);
 
   return (
-    <div className="w-96 shadow-2xl rounded-sm absolute mt-2 ml-2 overflow-y-auto bg-white">
+    <div
+      className="w-96 shadow-2xl rounded-sm absolute mt-2 ml-2 max-h-64 overflow-y-auto bg-white"
+      ref={ref}
+    >
       {searchResults?.map((user, i) => (
         <Result
           user={user}
@@ -29,6 +33,6 @@ function ResultsBox({
       ))}
     </div>
   );
-}
+});
 
 export default ResultsBox;
