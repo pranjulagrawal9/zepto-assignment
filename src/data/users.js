@@ -29,4 +29,34 @@ export const users = [
     imageUrl: "https://randomuser.me/api/portraits/men/98.jpg",
     email: "danny.hughes@example.com",
   },
+  {
+    id: 6,
+    name: "Joel Elliott",
+    imageUrl: "https://randomuser.me/api/portraits/men/92.jpg",
+    email: "joel.elliott@example.com",
+  },
+  {
+    id: 7,
+    name: "Gloria Payne",
+    imageUrl: "https://randomuser.me/api/portraits/women/45.jpg",
+    email: "gloria.payne@example.com",
+  },
+  {
+    id: 8,
+    name: "Claudia Herrera",
+    imageUrl: "https://randomuser.me/api/portraits/women/53.jpg",
+    email: "claudia.herrera@example.com",
+  },
+  {
+    id: 9,
+    name: "Sherri Meyer",
+    imageUrl: "https://randomuser.me/api/portraits/women/87.jpg",
+    email: "sherri.meyer@example.com",
+  },
+  {
+    id: 10,
+    name: "Tonya Rivera",
+    imageUrl: "https://randomuser.me/api/portraits/women/34.jpg",
+    email: "tonya.rivera@example.com",
+  },
 ];

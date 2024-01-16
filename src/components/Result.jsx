@@ -23,7 +23,7 @@ function Result({
         <div className="w-12 rounded-full overflow-hidden">
           <img src={user?.imageUrl} alt="user-image" />
         </div>
-        <p>{user?.name}</p>
+        <p className="font-medium">{user?.name}</p>
       </div>
       <p className="opacity-50">{user?.email}</p>
     </div>
