@@ -10,6 +10,8 @@ const ResultsBox = forwardRef(function ResultsBox(props, ref) {
     setUsersList,
     setChips,
     selectedItem,
+    onSelect,
+    inputRef,
   } = props;
   useEffect(() => {
     const filteredResults = usersList.filter((user) =>
@@ -27,7 +29,7 @@ const ResultsBox = forwardRef(function ResultsBox(props, ref) {
         <Result
           user={user}
           key={user.id}
-          {...{ setChips, setUsersList }}
+          {...{ setChips, setUsersList, onSelect, inputRef }}
           isActive={i === selectedItem}
         />
       ))}

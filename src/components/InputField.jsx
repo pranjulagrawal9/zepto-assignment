@@ -14,6 +14,7 @@ function InputField() {
   const [highlightElement, setHighlightElement] = useState(null);
   const backSpaceCounter = useRef(0);
   const boxRef = useRef(null);
+  const inputRef = useRef(null);
 
   function handleKeyBoardNavigation(e) {
     console.log(e.key);
@@ -28,10 +29,7 @@ function InputField() {
     } else if (e.key === "Enter" && selectedItem > -1) {
       const selectedUser = searchResults.find((_, i) => i === selectedItem);
       handleUserSelection(selectedUser, setChips, setUsersList);
-      setSearchQuery("");
-      setSelectedItem(-1);
-
-      resetChipHighlight();
+      resetOnSelect();
     } else if (e.key === "Backspace" && searchQuery.length === 0) {
       backSpaceCounter.current++;
       if (backSpaceCounter.current === 1) {
@@ -48,6 +46,13 @@ function InputField() {
   function resetChipHighlight() {
     setHighlightElement(null);
     backSpaceCounter.current = 0;
+  }
+
+  function resetOnSelect() {
+    setSearchQuery("");
+    setSelectedItem(-1);
+
+    resetChipHighlight();
   }
 
   function ensureVisible(index) {
@@ -100,6 +105,7 @@ function InputField() {
             placeholder="Add new user..."
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={handleKeyBoardNavigation}
+            ref={inputRef}
           />
           {displayBox && (
             <ResultsBox
@@ -111,6 +117,8 @@ function InputField() {
               usersList={usersList}
               setUsersList={setUsersList}
               ref={boxRef}
+              onSelect={() => resetOnSelect()}
+              inputRef={inputRef}
             />
           )}
         </div>

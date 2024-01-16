@@ -4,7 +4,7 @@ function Chip({ name, imageUrl, onRemove, isHighLight }) {
   return (
     <div
       className={`flex gap-2 items-center bg-gray-200 rounded-3xl w-fit ${
-        isHighLight ? "border-2 border-blue-500" : ""
+        isHighLight ? "border-2 border-blue-500" : "border-2 border-gray-200"
       }`}
     >
       <div className="w-8 rounded-full overflow-hidden">
