@@ -24,15 +24,25 @@ function InputField() {
       setSelectedItem((prev) =>
         prev > 0 ? prev - 1 : searchResults.length - 1
       );
-    } else if (e.key === "Enter") {
+    } else if (e.key === "Enter" && selectedItem > -1) {
       const selectedUser = searchResults.find((_, i) => i === selectedItem);
       handleUserSelection(selectedUser, setChips, setUsersList);
       setSearchQuery("");
       setSelectedItem(-1);
+      if (highlightElement >= 0) {
+        setHighlightElement(null);
+        backSpaceCounter.current = 0;
+      }
     } else if (e.key === "Backspace" && searchQuery.length === 0) {
       backSpaceCounter.current++;
       if (backSpaceCounter.current === 1) {
         setHighlightElement(chips.length - 1);
+      } else if (backSpaceCounter.current === 2) {
+        const deletedUser = chips[chips.length - 1];
+        setChips((prev) => prev.slice(0, -1));
+        setUsersList((prev) => [...prev, deletedUser]);
+        setHighlightElement(null);
+        backSpaceCounter.current = 0;
       }
     }
   }
