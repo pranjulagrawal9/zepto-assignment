@@ -17,7 +17,6 @@ function InputField() {
   const inputRef = useRef(null);
 
   function handleKeyBoardNavigation(e) {
-    console.log(e.key);
     if (e.key === "ArrowDown") {
       setSelectedItem((prev) =>
         prev < searchResults.length - 1 ? prev + 1 : 0
@@ -27,19 +26,29 @@ function InputField() {
         prev > 0 ? prev - 1 : searchResults.length - 1
       );
     } else if (e.key === "Enter" && selectedItem > -1) {
-      const selectedUser = searchResults.find((_, i) => i === selectedItem);
-      handleUserSelection(selectedUser, setChips, setUsersList);
-      resetOnSelect();
+      handleEnter();
     } else if (e.key === "Backspace" && searchQuery.length === 0) {
-      backSpaceCounter.current++;
-      if (backSpaceCounter.current === 1) {
-        setHighlightElement(chips.length - 1);
-      } else if (backSpaceCounter.current === 2) {
-        const deletedUser = chips[chips.length - 1];
-        setChips((prev) => prev.slice(0, -1));
-        setUsersList((prev) => [...prev, deletedUser]);
-        resetChipHighlight();
-      }
+      handleBackspace();
+    } else if (e.key === "Escape") {
+      setDisplayBox(false);
+    }
+  }
+
+  function handleEnter() {
+    const selectedUser = searchResults.find((_, i) => i === selectedItem);
+    handleUserSelection(selectedUser, setChips, setUsersList);
+    resetOnSelect();
+  }
+
+  function handleBackspace() {
+    backSpaceCounter.current++;
+    if (backSpaceCounter.current === 1) {
+      setHighlightElement(chips.length - 1);
+    } else if (backSpaceCounter.current === 2) {
+      const deletedUser = chips[chips.length - 1];
+      setChips((prev) => prev.slice(0, -1));
+      setUsersList((prev) => [...prev, deletedUser]);
+      resetChipHighlight();
     }
   }
 
@@ -51,7 +60,6 @@ function InputField() {
   function resetOnSelect() {
     setSearchQuery("");
     setSelectedItem(-1);
-
     resetChipHighlight();
   }
 
@@ -92,7 +100,10 @@ function InputField() {
           <Chip
             key={chip.id}
             {...chip}
-            onRemove={() => handleRemoveChip(chip)}
+            onRemove={() => {
+              handleRemoveChip(chip);
+              inputRef.current.focus();
+            }}
             isHighLight={highlightElement === i}
           />
         ))}
@@ -100,7 +111,7 @@ function InputField() {
           <input
             type="text"
             className="outline-none"
-            onFocus={() => setDisplayBox(true)}
+            onClick={() => setDisplayBox(true)}
             value={searchQuery}
             placeholder="Add new user..."
             onChange={(e) => setSearchQuery(e.target.value)}
