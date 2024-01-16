@@ -1,5 +1,6 @@
 import { forwardRef, useEffect } from "react";
 import Result from "./Result";
+import PropTypes from "prop-types";
 
 const ResultsBox = forwardRef(function ResultsBox(props, ref) {
   const {
@@ -36,5 +37,17 @@ const ResultsBox = forwardRef(function ResultsBox(props, ref) {
     </div>
   );
 });
+
+ResultsBox.propTypes = {
+  query: PropTypes.string,
+  searchResults: PropTypes.array,
+  setSearchResults: PropTypes.func,
+  usersList: PropTypes.array,
+  setUsersList: PropTypes.func,
+  setChips: PropTypes.func,
+  selectedItem: PropTypes.number,
+  onSelect: PropTypes.func,
+  inputRef: PropTypes.object,
+};
 
 export default ResultsBox;

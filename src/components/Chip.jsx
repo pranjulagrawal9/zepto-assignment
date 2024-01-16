@@ -1,4 +1,12 @@
 import { IoCloseOutline } from "react-icons/io5";
+import PropTypes from "prop-types";
+
+Chip.propTypes = {
+  name: PropTypes.string,
+  imageUrl: PropTypes.string,
+  onRemove: PropTypes.func,
+  isHighLight: PropTypes.bool,
+};
 
 function Chip({ name, imageUrl, onRemove, isHighLight }) {
   return (

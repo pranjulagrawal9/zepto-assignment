@@ -1,4 +1,14 @@
 import { handleUserSelection } from "../utils/handleUserSelection";
+import PropTypes from "prop-types";
+
+Result.propTypes = {
+  user: PropTypes.object,
+  setChips: PropTypes.func,
+  setUsersList: PropTypes.func,
+  isActive: PropTypes.bool,
+  onSelect: PropTypes.func,
+  inputRef: PropTypes.object,
+};
 
 function Result({
   user,
