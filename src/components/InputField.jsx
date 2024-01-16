@@ -29,11 +29,20 @@ function InputField() {
     }
   }
 
+  function handleRemoveChip(user) {
+    setChips((prev) => prev.filter((chip) => chip.id !== user.id));
+    setUsersList((prev) => [...prev, user]);
+  }
+
   return (
     <div className="w-1/2 border-b-2 border-blue-500">
       <div className="flex flex-wrap gap-2">
         {chips?.map((chip) => (
-          <Chip key={chip.id} {...chip} />
+          <Chip
+            key={chip.id}
+            {...chip}
+            onRemove={() => handleRemoveChip(chip)}
+          />
         ))}
         <div className="relative">
           <input
